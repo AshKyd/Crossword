@@ -1,6 +1,8 @@
-
 /**
-* Jesse Weisbeck's Crossword Puzzle (for all 3 people left who want to play them)
+* Crossword Puzzle by Jesse Weisbeck (@jlweisbeck)
+* Various tweaks by Ash Kyd (@AshKyd)
+* Rot13 tweak and nsa.js content option by The Dod (@TheRealDod)
+*
 */
 (function($){
 	$.fn.crossword = function(opts) {
@@ -12,6 +14,7 @@
 				- activePosition and activeClueIndex are the primary vars that set the ui whenever there's an interaction
 				- 'Entry' is a puzzler term used to describe the group of letter inputs representing a word solution
 				- This puzzle isn't designed to securely hide answerers. A user can see answerers in the js source
+					- The Dod added an options for rot13 (against *accidental* disclosure. Not against cheating).
 					- An xhr provision can be added later to hit an endpoint on keyup to check the answerer
 				- The ordering of the array of problems doesn't matter. The position & orientation properties is enough information
 				- Puzzle authors must provide a starting x,y coordinates for each entry
@@ -254,7 +257,9 @@
 						positionOffset = entryCount - puzz.data[puzz.data.length-1].position; // diff. between total ENTRIES and highest POSITIONS
 						
 					for (var x=1, p = entryCount; x <= p; ++x) {
-						var letters = puzz.data[x-1].answer.split('');
+						var letters = (puzz.data[x-1].rot13 ?
+                                                    util.rot13(puzz.data[x-1].answer) : puzz.data[x-1].answer
+                                                ).split('');
 
 						for (var i=0; i < entries[x-1].length; ++i) {
 							var thisPuzz = puzz.data[x-1];
@@ -344,6 +349,7 @@
 						var $entry = $entries.eq(possibleCells[random]);
 
 						var clue = data.answer.substr(possibleCells[random],1);
+                                                if (data.rot13) clue = util.rot13(clue);
 						$entry.val(clue);
 
 						_this.updateHintsRemaining(--hintsRemaining);
@@ -386,7 +392,8 @@
 					util.getActivePositionFromClassGroup($(e.target));
 				
 					valToCheck = puzz.data[activePosition].answer.toLowerCase();
-
+                                        if (puzz.data[activePosition].rot13)
+                                            valToCheck=util.rot13(valToCheck);
 					currVal = $('.position-' + activePosition + ' input')
 						.map(function() {
 					  		return $(this)
@@ -678,6 +685,18 @@
 					}
 						
 				},
+				/*
+                                    Rot13 hides answers from *accidental* disclosure. Cheaters can still cheat :)
+                                */
+                                rot13: function(s) {
+                                    return (s ? s : this).split('').map(function(_)
+                                    {
+                                         if (!_.match(/[A-za-z]/)) return _;
+                                         c = Math.floor(_.charCodeAt(0) / 97);
+                                         k = (_.toLowerCase().charCodeAt(0) - 83) % 26 || 26;
+                                         return String.fromCharCode(k + ((c == 0) ? 64 : 96));
+                                    }).join('');
+                                },
 				
 				getSkips: function(position) {
 					if ($(clueLiEls[position]).hasClass('clue-done')){

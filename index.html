@@ -6,164 +6,27 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>Qurossword - A javascript crossword puzzle plugin</title>
+	<title>EFF's Xmas 2013 NSA crossword puzzle - interactive edition (V2)</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-	<script src="js/jquery.crossword.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<link rel="stylesheet" href="css/crossword.css" type="text/css">
+    <!-- begin non-#CeilingKeith
 	<script src="js/script.js"></script>
-
-	<style type="text/css" media="screen">
-	/*
-		Default puzzle styling
-	*/
-	body {
-		font: 62.5%/1.3em Helvetica, sans-serif;
-		width: 90.3%;
-		margin: 10px auto;
-		max-width:960px;
-	}
-		table { 
-			width: 100%;
-			border: 1px solid #cdcdcd;
-			border-spacing: 0; 
-			border-collapse: collapse; 
-		}
-		table tr{
-			width: 100%;
-		}
-		table td {
-			border: 1px solid #cdcdcd;
-			padding: 0;
-			margin: 0;
-			background-color: #333;
-			vertical-align: top;
-		}
-		table td div{
-			position:relative;
-		}
-
-		td.light{
-			background: #f4f4f4
-		}
-				
-		td input {
-			padding: 0em;
-			border: transparent;
-			text-align: center;
-			font-size: 2em;
-			color: #666;
-			background:transparent;
-			background-color: #f4f4f4;
-			text-transform: uppercase;
-			font-weight:bold;
-			position:absolute;
-			width:100%;
-			height:10px;
-
-			*left:-2px;
-			*top:-2px;
-		}
-		
-		td input:focus {
-			background-color: #fff;
-		}
-		
-		td span {
-			color: #444;
-			font-size: 0.8em;
-			position: absolute;
-			top: -1px;
-			left: 1px;
-		}
-		
-		input.done {
-			font-weight: bold;
-			color: green;
-		}
-		
-		.active,
-		.clues-active {
-			background-color: #ddd;
-		}
-		.clue-done {
-			color: #999;
-			text-decoration: line-through;
-		}
-		
-		#puzzle-wrapper {
-			float: left;
-			width: 54%;
-			margin-right: 3%;
-		}
-		#puzzle-clues {
-			float: left;
-			width: 40%;
-		}
-		
-		#puzzle-clues li{
-			font-size: 1.2em;
-			margin: .3em;
-			line-height: 1.6em;
-			cursor:pointer;
-		}
-
-		#puzzle-clues ul{
-			padding:0;
-		}
-		#puzzle-clues li{
-			list-style:none;
-			padding-left:2em;
-			clear:both;
-		}
-		#puzzle-clues li .position{
-			position:absolute;
-			margin-left:-2em;
-			font-weight:bold;
-		}
-		#puzzle-clues li .position:after{
-			content:".";
-		}
-
-		@media (max-width:700px){
-			#puzzle-wrapper,
-			#puzzle-clues {
-				float: none;
-				width: auto;
-				margin-right: 0;
-			}
-			#puzzle-wrapper{
-				margin:0 30px;
-			}
-			#puzzle-clues div{
-				padding:0;
-				float:left;
-				width:40%;
-				margin-left:5%;
-			}
-		}
-		@media (max-width:480px){
-			#puzzle-clues div{
-				float:none;
-				width:auto;
-			}
-			#puzzle-wrapper{
-				margin:0;
-			}
-		}
-
-		#puzzle-clues .words{
-			font-size:.9em;
-			color:#888;
-			float:right;
-			margin-left:.5em;
-		}
-		
-	</style>
-
+    end non-#CeilingKeith -->
+    <!-- begin #CeilingKeith -->
+	<link rel="stylesheet" href="css/nsa.css" type="text/css">
+	<script src="js/nsa.js"></script>
+    <!-- end #CeilingKeith -->
+	<script src="js/jquery.crossword.js"></script>
 </head>
 
 <body>
-<div id="puzzle-wrapper"></div>
-
+	
+<h3 align=center>
+    Interactive edition (V2) of
+    EFF's <a target="_blank" href="https://www.eff.org/deeplinks/2013/12/crossword-what-did-we-learn-about-nsa-year">Xmas 2013 NSA crossword puzzle</a> &bull;
+    <a target="_blank" href="https://github.com/thedod/nsa-crossword">Fork this</a>
+</h3>
+<div id="puzzle-wrapper"><!-- crossword puzzle appended here --></div>
 </body>
 </html>	
